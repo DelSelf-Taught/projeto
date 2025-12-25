@@ -12,17 +12,22 @@ class MachineLearningModel:
         self.random_state = random_state
         self.model = RandomForestClassifier(random_state=self.random_state)
 
+    # Generate synthetic data
     def generate_data(self):
         X, y = make_blobs(n_samples=self.n_samples, centers=self.n_classes, n_features=self.n_features, random_state=self.random_state)
         return train_test_split(X, y, test_size=self.test_size, random_state=self.random_state)
 
+    # Train the model
     def train(self, X_train, y_train):
         self.model.fit(X_train, y_train)
 
+    # Evaluate the model's performance
     def evaluate(self, X_test, y_test):
         y_pred = self.model.predict(X_test)
         return accuracy_score(y_test, y_pred)
     
+
+# Example usage    
 if __name__ == "__main__":  
     ml_model = MachineLearningModel()
     X_train, X_test, y_train, y_test = ml_model.generate_data()
